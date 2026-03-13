@@ -49,11 +49,12 @@ def make_graph(path):
     filename = os.path.splitext(os.path.basename(path))[0]
     graphname = parse_name(filename)
     min = detect_min_deriv(df)
-    dia = parse_light_name(filename)[0]
+    dia, gamme = parse_light_name(filename)
     man_offset = 500
-    print(f"dia:{dia}")
-    if dia == "0.005 in":
+    if dia == "0.005 in" and gamme == "[-50;50] mV":
         man_offset = 100
+    elif dia == "0.005 in" and gamme != "[-50;50] mV":
+        man_offset = 10000
     if dia == "0.01 in":
         man_offset = 400
     if dia == "0.02 in":
