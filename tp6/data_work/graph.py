@@ -1,9 +1,11 @@
-import lvm.lvm as lvm
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
-from data_work.reg_coef import r_coef
+from data_work.actual_regression import do_regression
+from data_work.parsers import parse_name
+from data_work.parsers import parse_light_name
+from data_work.parsers import parse_data_file
 
 
 def temp_results():
@@ -35,55 +37,6 @@ def temp_data(path, action="get"):
     return reg_pkl
 
 
-def parse_name(filename):
-    parts = filename.split("_")
-    TC_size = parts[1]
-    try:
-        TC_size = float(TC_size) / 1000.0
-        TC_size = f"D = {TC_size} in"
-    except:
-        TC_size = "artisanal"
-    if parts[2] == "s":
-        filtre = "acquisition non filtrée"
-    else:
-        filtre = " acquisition filtrée"
-
-    if any("v" in part.lower() for part in parts):
-        if any("m" in part.lower() for part in parts):
-            gamme = "[-50;50] mV"
-        else:
-            gamme = "[-10;10] V"
-    else:
-        gamme = "[-50;50] mV"
-
-    try:
-        it = int(parts[-1])
-        it = f"essai {it}"
-    except:
-        it = "essai 1"
-
-    name = (
-        f"tension mesurée et modélisée d'un thermocouple {TC_size} plongé dans de l'eau glacée"
-        + "\n"
-        + f"{filtre}, gamme = {gamme}, {it}"
-    )
-    return name
-
-
-def parse_light_name(filename):
-    parts = filename.split("_")
-    TC_size = parts[1]
-    if any("v" in part.lower() for part in parts):
-        if any("m" in part.lower() for part in parts):
-            gamme = "[-50;50] mV"
-        else:
-            gamme = "[-10;10] V"
-    else:
-        gamme = "[-50;50] mV"
-
-    return f"{float(TC_size)/1000} in", gamme
-
-
 def regression(a, b, c):
     t = np.arange(0, 3, 0.0001)
     reg = a * np.exp(-1 * t / b) + c
@@ -91,29 +44,31 @@ def regression(a, b, c):
 
 
 def make_graph(path):
-    raw_df = lvm.parse_lvm(path)
-    df = raw_df.drop(columns=["Comment"], errors="ignore")
+    df = parse_data_file(path)
     fig, ax = plt.subplots()
     filename = os.path.splitext(os.path.basename(path))[0]
-    main_dir = os.path.abspath(os.path.join(os.getcwd()))
     graphname = parse_name(filename)
-    rc_df = r_coef(main_dir, "get")
-    if rc_df is not None:
-        a, b, c = (
-            rc_df.loc[f"{filename}.lvm", "a"],
-            rc_df.loc[f"{filename}.lvm", "b"],
-            rc_df.loc[f"{filename}.lvm", "c"],
-        )
-    else:
-        a, b, c = (0, 0, 0)
+    min = detect_min_deriv(df)
+    start = int(min[0] * 10000) - 200
+    a, b, c = do_regression(path, start)
     reg = regression(a, b, c)
-
-    ax.plot(df["X_Value"], df["Tension"], label="mesurée")
-    ax.plot(df["X_Value"], reg, label="modèle")
-    ax.set_xlabel("Time (s)")
-    ax.set_ylabel("Voltage (V)")
+    ax.plot(df["X_Value"][start:], df["Tension"][start:] * 1000, label="mesurée")
+    ax.plot(df["X_Value"][start:], reg[start:] * 1000, label="modèle")
+    ax.plot(min[0], min[1], "o", markersize=10, color="red", label="change")
+    ax.set_xlabel("Temps (s)")
+    ax.set_ylabel("Tension (mV)")
     ax.set_title(graphname)
     ax.legend()
+    ax.text(
+        x=0.01,
+        y=0.99,  # coordinates in axes fraction
+        s=f"V = {round(a,3)}*exp(-t/{round(b,3)})+{round(c,3)}",
+        transform=ax.transAxes,  # important: use axes coordinates
+        verticalalignment="top",
+        horizontalalignment="left",
+        fontsize=12,
+        color="blue",
+    )
 
     parent_dir = os.path.abspath(os.path.join(os.path.dirname(path), ".."))
     plot_dir = os.path.join(parent_dir, "graphs")
@@ -122,6 +77,18 @@ def make_graph(path):
     fig.savefig(save_path, dpi=300, bbox_inches="tight")
 
     return None
+
+
+def detect_min_deriv(df):
+    derivative = np.gradient(df["Tension"], df["X_Value"])
+    window = 100
+    weights = np.ones(window) / window
+    smoothed = np.convolve(derivative, weights, mode="same")
+
+    min_idx = np.argmin(smoothed)
+    x_at_min = df["X_Value"].iloc[min_idx]
+    y_at_min = df["Tension"].iloc[min_idx]
+    return x_at_min, y_at_min
 
 
 def make_tables(rc_df, path):
