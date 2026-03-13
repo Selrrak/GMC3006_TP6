@@ -49,7 +49,16 @@ def make_graph(path):
     filename = os.path.splitext(os.path.basename(path))[0]
     graphname = parse_name(filename)
     min = detect_min_deriv(df)
-    start = int(min[0] * 10000) - 500
+    dia = parse_light_name(filename)[0]
+    man_offset = 500
+    print(f"dia:{dia}")
+    if dia == "0.005 in":
+        man_offset = 100
+    if dia == "0.01 in":
+        man_offset = 400
+    if dia == "0.02 in":
+        man_offset = 300
+    start = int(min[0] * 10000) - man_offset
     a, b, c = do_regression(path, start)
     reg = regression(a, b, c)
     ax.plot(

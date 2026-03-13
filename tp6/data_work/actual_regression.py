@@ -35,7 +35,7 @@ def do_regression(path, start):
         model,
         x,
         y,
-        # p0=[a_2, b_2, c_2],
+        p0=[a_2, b_2, c_2],
         maxfev=7000,
         # bounds=(lower_bounds, upper_bounds),
     )
