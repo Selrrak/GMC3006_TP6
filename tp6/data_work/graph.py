@@ -49,12 +49,17 @@ def make_graph(path):
     filename = os.path.splitext(os.path.basename(path))[0]
     graphname = parse_name(filename)
     min = detect_min_deriv(df)
-    start = int(min[0] * 10000) - 200
+    start = int(min[0] * 10000) - 500
     a, b, c = do_regression(path, start)
     reg = regression(a, b, c)
-    ax.plot(df["X_Value"][start:], df["Tension"][start:] * 1000, label="mesurée")
-    ax.plot(df["X_Value"][start:], reg[start:] * 1000, label="modèle")
-    ax.plot(min[0], min[1], "o", markersize=10, color="red", label="change")
+    ax.plot(
+        df["X_Value"][start:] - df["X_Value"][start],
+        df["Tension"][start:] * 1000,
+        label="mesurée",
+    )
+    ax.plot(
+        df["X_Value"][start:] - df["X_Value"][start], reg[start:] * 1000, label="modèle"
+    )
     ax.set_xlabel("Temps (s)")
     ax.set_ylabel("Tension (mV)")
     ax.set_title(graphname)
