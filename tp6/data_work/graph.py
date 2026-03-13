@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 import numpy as np
 import os
 import pandas as pd
 from data_work.actual_regression import do_regression
+from data_work.reg_coef import r_coef
 from data_work.parsers import parse_name
 from data_work.parsers import parse_light_name
 from data_work.parsers import parse_data_file
@@ -37,60 +39,69 @@ def temp_data(path, action="get"):
     return reg_pkl
 
 
-def regression(a, b, c):
-    t = np.arange(0, 3, 0.0001)
+def regression(t, a, b, c):
     reg = a * np.exp(-1 * t / b) + c
     return reg
 
 
 def make_graph(path):
     df = parse_data_file(path)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(14, 4))
     filename = os.path.splitext(os.path.basename(path))[0]
     graphname = parse_name(filename)
     min = detect_min_deriv(df)
     dia, gamme = parse_light_name(filename)
     man_offset = 500
     if dia == "0.005 in" and gamme == "[-50;50] mV":
-        man_offset = 100
+        man_offset = 50
     elif dia == "0.005 in" and gamme != "[-50;50] mV":
         man_offset = 10000
     if dia == "0.01 in":
-        man_offset = 400
-    if dia == "0.02 in":
         man_offset = 300
+    if dia == "0.02 in":
+        man_offset = 190
+    if dia == "0.032 in":
+        man_offset = 455
     start = int(min[0] * 10000) - man_offset
     a, b, c = do_regression(path, start)
-    reg = regression(a, b, c)
-    ax.plot(
-        df["X_Value"][start:] - df["X_Value"][start],
-        df["Tension"][start:] * 1000,
-        label="mesurée",
-    )
-    ax.plot(
-        df["X_Value"][start:] - df["X_Value"][start], reg[start:] * 1000, label="modèle"
-    )
+    time_series = (df["X_Value"][start:] - df["X_Value"][start]).to_numpy()
+    voltage = (df["Tension"][start:] * 1000).to_numpy()
+
+    reg = regression(time_series, a, b, c)
+    ax.scatter(time_series, voltage, label="mesurée", s=2)
+    ax.grid(True)
+    ax.plot(time_series, reg * 1000, label="modèle", color="orange")
     ax.set_xlabel("Temps (s)")
     ax.set_ylabel("Tension (mV)")
-    ax.set_title(graphname)
     ax.legend()
+    c_symbol = "+"
+    if c < 0:
+        c_symbol = "-"
+    a, b, c = round(1000 * a, 6), round(b, 6), round(abs(1000 * c), 6)
+
+    parent_dir = os.path.abspath(os.path.join(path, "..", ".."))
+    main_dir = os.path.join(parent_dir, "tp6")
+    r_coef(main_dir, "edit", TC=f"{filename}.lvm", new_coefs=[a, b, c])
+
     ax.text(
-        x=0.01,
-        y=0.99,  # coordinates in axes fraction
-        s=f"V = {round(a,3)}*exp(-t/{round(b,3)})+{round(c,3)}",
+        x=0.45,
+        y=0.85,  # coordinates in axes fraction
+        s=f"V = {a}*exp(-t/{b}){c_symbol}{c}",
         transform=ax.transAxes,  # important: use axes coordinates
         verticalalignment="top",
         horizontalalignment="left",
         fontsize=12,
-        color="blue",
+        color="black",
     )
 
     parent_dir = os.path.abspath(os.path.join(os.path.dirname(path), ".."))
     plot_dir = os.path.join(parent_dir, "graphs")
-    save_path = os.path.join(plot_dir, f"{filename}.png")
+    save_path = os.path.join(plot_dir, f"{filename}no_title.png")
+    save_path_w_title = os.path.join(plot_dir, f"{filename}.png")
     os.makedirs(plot_dir, exist_ok=True)
     fig.savefig(save_path, dpi=300, bbox_inches="tight")
-
+    ax.set_title(graphname)
+    fig.savefig(save_path_w_title, dpi=300, bbox_inches="tight")
     return None
 
 
@@ -127,7 +138,7 @@ def make_tables(rc_df, path):
     table = ax.table(
         cellText=cell_data,
         rowLabels=TCs,
-        colLabels=["gamme de prise de mesure", "constante de temps"],
+        colLabels=["gamme de prise de mesure", "constante de temps [s]"],
         loc="center",
     )
     for cell in table.get_celld().values():
@@ -139,6 +150,7 @@ def make_tables(rc_df, path):
 
     fig, ax = plt.subplots()
     ax.axis("off")
+
     if isinstance(t_df, pd.DataFrame):
         table = ax.table(
             cellText=t_df.values.tolist(),
@@ -146,8 +158,41 @@ def make_tables(rc_df, path):
             colLabels=list(t_df.columns),
             loc="center",
         )
-    for cell in table.get_celld().values():
-        cell.set_text_props(ha="center", va="center")
 
-    fig.savefig(save_path_temp, dpi=300, bbox_inches="tight")
+        fig.canvas.draw()  # needed to compute positions
+
+        # cells we want the header to span
+        left_cell = table[(0, 0)]
+        right_cell = table[(0, len(t_df.columns) - 1)]
+
+        # bounding boxes in display coords
+        renderer = fig.canvas.get_renderer()
+        bbox_left = left_cell.get_window_extent(renderer)
+        bbox_right = right_cell.get_window_extent(renderer)
+
+        # convert to axis coordinates
+        inv = ax.transAxes.inverted()
+        x0, y0 = inv.transform((bbox_left.x0, bbox_left.y1))
+        x1, y1 = inv.transform((bbox_right.x1, bbox_right.y1))
+
+        width = x1 - x0
+        height = inv.transform((0, bbox_left.y1 + bbox_left.height))[1] - y0
+
+        # draw rectangle
+        rect = Rectangle((x0, y0), width, height, transform=ax.transAxes, fill=False)
+        ax.add_patch(rect)
+
+        # centered label
+        ax.text(
+            x0 + width / 2,
+            y0 + height / 2,
+            "Température en fonction du milieu [°C]",
+            ha="center",
+            va="center",
+            transform=ax.transAxes,
+        )
+        for cell in table.get_celld().values():
+            cell.set_text_props(ha="center", va="center")
+
+        fig.savefig(save_path_temp, dpi=300, bbox_inches="tight")
     return None

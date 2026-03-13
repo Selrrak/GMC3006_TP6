@@ -2,13 +2,13 @@ import os
 import pandas as pd
 
 
-def rc_results():
+def generate_df():
     reg_coef = [
-        [0.003, 1.363, 0.001],
-        [4.91e26, 0.036, 0.0],
-        [1.12e5, 0.09, 0.0],
-        [2.23e18, 0.036, 0.0],
-        [2.90e9, 0.069, 0.0],
+        [0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0],
     ]
     datafiles = [
         "TC_0005_s_filtre_10v_2.lvm",
@@ -22,13 +22,21 @@ def rc_results():
     return df
 
 
-def r_coef(path, action="get"):
-
-    df = rc_results()
+def r_coef(path, action, TC=None, new_coefs=None):
     os.makedirs(path, exist_ok=True)
     filename = os.path.join(path, "reg_coef.pkl")
-    if action == "save":
+
+    if action == "gen":
+        df = generate_df()
         df.to_pickle(filename)
         return None
-    reg_pkl = pd.read_pickle(filename)
-    return reg_pkl
+
+    if action == "get":
+        reg_pkl = pd.read_pickle(filename)
+        return reg_pkl
+
+    if action == "edit" and TC is not None and new_coefs is not None:
+        reg = r_coef(path, "get")
+        reg.loc[TC] = new_coefs
+        reg.to_pickle(filename)
+        return None
