@@ -95,7 +95,7 @@ def make_graph(path):
     )
 
     parent_dir = os.path.abspath(os.path.join(os.path.dirname(path), ".."))
-    plot_dir = os.path.join(parent_dir, "graphs")
+    plot_dir = os.path.join(parent_dir, "Rapport_TP6_7_GMC3006", "graphs")
     save_path = os.path.join(plot_dir, f"{filename}no_title.png")
     save_path_w_title = os.path.join(plot_dir, f"{filename}.png")
     os.makedirs(plot_dir, exist_ok=True)
@@ -119,7 +119,7 @@ def detect_min_deriv(df):
 
 def make_tables(rc_df, path):
     parent_dir = os.path.dirname(path)
-    table_dir = os.path.join(parent_dir, "graphs")
+    table_dir = os.path.join(parent_dir, "Rapport_TP6_7_GMC3006", "graphs")
     os.makedirs(table_dir, exist_ok=True)
 
     save_path_tau = os.path.join(table_dir, "tau_table.png")
