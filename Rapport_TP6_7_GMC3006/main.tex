@@ -1,10 +1,34 @@
-\documentclass{article}
+\documentclass[11pt,twoside]{article}
 \usepackage{graphicx} % Required for inserting images
-
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{float}
+\usepackage[
+    left=3.18cm,
+    right=3.18cm,
+    top=2.54cm,
+    bottom=2.54cm
+]{geometry}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\fancyhf{} % clear all headers and footers
+
+\fancyfoot[RO]{\thepage} % Right side on Odd pages
+\fancyfoot[LE]{\thepage} % Left side on Even pages
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage{setspace}
+\setstretch{1.15}
+
+\usepackage{amsmath} % for \numberwithin
+\numberwithin{figure}{section}
+
+\usepackage{caption}
+\captionsetup{labelsep=colon,labelfont={footnotesize,bf},textfont={footnotesize,normalfont}}
 
 \begin{document}
 
@@ -13,18 +37,14 @@
 
 \vspace*{1cm}
 
-\textbf{Zied Gharbi (536961413)} \\[0.25cm]
-\textbf{Charles Bouthilier (536842818)}
+{\Large \textbf{Caractérisation de thermocouples}} \\[0.5cm]
+{\large Rapport des travaux pratiques 6 et 7, cours GMC-3006} \\[0.5cm]
+
 
 \vfill
 
-{\Large \textbf{Rapport mesure de température}} \\[0.5cm]
-{\large (TP 6 et 7)}
-
-\vfill
-
-Travail présenté à Janika Bourgeois \\ [0.25cm]
-Introduction à la mesure et à la mécatronique (GMC-3006)
+Travail présenté à Mme Janika Bourgeois et M. André Chamberland \\ [0.25cm]
+Rédigé par \textbf{Zied Gharbi (536961413)} et \textbf{Charles Bouthilier (536842818)}
 
 \vfill
 
@@ -41,55 +61,60 @@ Université Laval
 \tableofcontents
 \newpage
 
-%Table des matières
-\section{Table des matières}
+
+%Introduction
+\newpage
+\thispagestyle{empty}
+\section{Introduction}
 
 % Partie 1
-\section{Partie 1:  Étalonnage dynamique (TP 6)}
+\newpage
+\section{Étalonnage dynamique de thermocouples (TP 6)}
+\thispagestyle{empty}
 \subsection{But}
 L'objectif de la partie 1 du TP6 est de déterminer la constante de temps pour des thermocouples de différents diamètres, puis comparer les résultats obtenus.
 \subsection{Graphiques}
 
 %Graph 1
+\setcounter{section}{1}
 \begin{figure} [H]
     \centering
-    \includegraphics[width=1\linewidth]{../graphs/TC_0005_s_filtre_50mvno_title.png}
-    \caption{Tension d’un thermocouple de 0,005 pouces de diamètre, plongé dans l’eau glacée, en fonction du temps. Pour une gamme de -50 à 50 mV.}
+    \includegraphics[width=1\linewidth]{graphs/TC_0005_s_filtre_50mvno_title.png}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.005 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés. Les donnés ont été recadrées pour pour exclure le temps d'acquisition antérieur à la plongée afin d'ameliorer la qualité du modèle exponentiel. Les points ne sont pas liés entre eux pour apprécié l'effet de la fréquence et la gamme d'acquisition sur la prise de mesures}
     \label{fig:placeholder}
 \end{figure}
 
 %Graph 2
 \begin{figure} [H]
     \centering
-    \includegraphics[width=1\linewidth]{../graphs/TC_010_s_filtreno_title.png}
-    \caption{Tension d’un thermocouple de 0,01 pouces de diamètre, plongé dans l’eau glacée, en fonction du temps. Pour une gamme de -50 à 50 mV.}
+    \includegraphics[width=1\linewidth]{graphs/TC_010_s_filtreno_title.png}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.010 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
     \label{fig:placeholder}
 \end{figure}
 
 %Graph 3
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{../graphs/TC_0020_s_filtreno_title.png}
-    \caption{Tension d’un thermocouple de 0,02 pouces de diamètre, plongé dans l’eau glacée, en fonction du temps. Pour une gamme de -50 à 50 mV.}
+    \includegraphics[width=1\linewidth]{graphs/TC_0020_s_filtreno_title.png}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.020 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
     \label{fig:placeholder}
 \end{figure}
 
 %Graph 4
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{../graphs/TC_0032_s_filtreno_title.png}
-    \caption{Tension d’un thermocouple de 0,032 pouces de diamètre, plongé dans l’eau glacée, en fonction du temps. Pour une gamme de -50 à 50 mV.}
+    \includegraphics[width=1\linewidth]{graphs/TC_0032_s_filtreno_title.png}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.032 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
     \label{fig:placeholder}
 \end{figure}
 
 %Graph 5
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{../graphs/TC_0005_s_filtre_10v_2no_title.png}
-    \caption{Tension d’un thermocouple de 0,032 pouces de diamètre, plongé dans l’eau glacée, en fonction du temps. Pour une gamme de -10 à 10 V.}
-    \label{fig:placeholder}
+    \includegraphics[width=1\linewidth]{graphs/TC_0005_s_filtre_10v_2no_title.png}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.005 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -10 à 10 V pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}    \label{fig:placeholder}
 \end{figure}
-
+\setcounter{section}{2}
 \subsection{Tableau}
 %Tableau tau des thermocouples
 \begin{table}[H]
@@ -121,7 +146,9 @@ Cette observation constitue toutefois une contradiction avec le résultat attend
 La figure 5 représente l'essai effectué pour une gamme de -10 à 10 V. Les points de ce graphique ne suivent pas une tendance linéaire, et il n'est donc pas possible d'obtenir une courbe de régression valide. Ce phénomène est causé par la gamme d'acquisition trop élevée, qui dépasse l'amplitude normale du signal du thermocouple (de l'ordre de quelques millivolts).\cite{electronicdesign} Le signal est ainsi saturé et fortement bruité, ce qui produit des résultats inexacts. Par conséquent, la courbe de régression linéaire obtenue n'est pas représentative de la relation entre la tension du thermocouple et le temps. La gamme utilisée est donc trop élevée par rapport aux signaux réellement captés par le thermocouple.
 
 %Partie 2
-\section{Partie 2 : Fabrication d’un thermocouple (TP 6)}
+\newpage{}
+\section{Fabrication d’un thermocouple (TP 6)}
+\thispagestyle{empty}
 
 \subsection{But}
 L’objectif de la partie 2 du TP6 est de comprendre le fonctionnement et la fabrication d’un thermocouple. Cette partie inclut également la vérification et l’évaluation de l’efficacité du thermocouple fabriqué.
@@ -153,16 +180,22 @@ Tout d’abord, les résultats du thermomètre électrique et du thermomètre à
 Plusieurs sources d'erreurs peuvent expliquer la différence entre les résultats de température. Entre autres, l'instabilité de la température de l'eau chaude, qui diminuait avec le temps, pourrait expliquer une partie de cet écart. Ainsi, une imperfection au sein du thermocouple pourrait également expliquer les résultats de températures inférieures obtenus par le thermocouple.
 
 %Partie 3
-\section{Partie 3 : Étalonnage statistique (TP 7)}
+\newpage{}
+\section{Étalonnage statique de Thermocouples (TP 7)}
+\thispagestyle{empty}
 \subsection{But}
 \subsection{Graphiques}
 \subsection{Tableau}
 \subsection{Discussion}
 
 %Conclusion
+\newpage
+\thispagestyle{empty}
 \section{Conclusion}
 
 %Bibliographie
+\newpage
+\thispagestyle{empty}
 \begin{thebibliography}{9}
 
 \bibitem{huang2024thermocouple}

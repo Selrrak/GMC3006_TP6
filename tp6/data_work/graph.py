@@ -45,8 +45,20 @@ def regression(t, a, b, c):
 
 
 def make_graph(path):
+    plt.rcParams.update(
+        {
+            "text.usetex": True,  # render text with LaTeX
+            "font.family": "serif",  # use serif font (Times)
+            "font.serif": ["Times"],  # specify Times explicitly
+            "font.size": 17,  # base font size for axes, labels, legends
+            "axes.titlesize": 19,  # title size
+            "axes.labelsize": 17,  # x/y labels
+            "xtick.labelsize": 15,  # tick labels
+            "ytick.labelsize": 15,
+        }
+    )
     df = parse_data_file(path)
-    fig, ax = plt.subplots(figsize=(14, 4))
+    fig, ax = plt.subplots(figsize=(12, 6))
     filename = os.path.splitext(os.path.basename(path))[0]
     graphname = parse_name(filename)
     min = detect_min_deriv(df)
@@ -73,7 +85,7 @@ def make_graph(path):
     ax.plot(time_series, reg * 1000, label="modèle", color="orange")
     ax.set_xlabel("Temps (s)")
     ax.set_ylabel("Tension (mV)")
-    ax.legend()
+    ax.legend(loc="center right")
     c_symbol = "+"
     if c < 0:
         c_symbol = "-"
@@ -90,7 +102,7 @@ def make_graph(path):
         transform=ax.transAxes,  # important: use axes coordinates
         verticalalignment="top",
         horizontalalignment="left",
-        fontsize=12,
+        fontsize=17,
         color="black",
     )
 
