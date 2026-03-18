@@ -47,9 +47,9 @@ def regression(t, a, b, c):
 
 def graph_exp(df):
     X = df["Temp. RTD"]
-    K = df["Type K"]
-    J = df["Type J"]
-    E = df["Type E"]
+    K = 1000 * df["Type K"]
+    J = 1000 * df["Type J"]
+    E = 1000 * df["Type E"]
     fig, ax = plt.subplots()
     ax.plot(X, K, label="type K", marker="o")
     ax.plot(X, J, label="Type J", marker="x")
@@ -79,7 +79,7 @@ def make_graphs_tp7(path):
     exp = graph_exp(df)
     parent_dir = os.path.abspath(os.path.join(os.path.dirname(path), ".."))
     save_dir = os.path.join(parent_dir, "graphs")
-    exp.savefig(os.path.join(save_dir, "mesures.png"), dpi=300, bbox_inches="tight")
+    exp.savefig(os.path.join(save_dir, "mesures_TP7.png"), dpi=300, bbox_inches="tight")
     return None
 
 
