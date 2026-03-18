@@ -1,4 +1,5 @@
 import lvm.lvm as lvm
+import pandas as pd
 
 
 def parse_name(filename):
@@ -53,4 +54,9 @@ def parse_light_name(filename):
 def parse_data_file(path):
     raw_df = lvm.parse_lvm(path)
     df = raw_df.drop(columns=["Comment"], errors="ignore")
+    return df
+
+
+def parse_txt_file(path: str) -> pd.Dataframe:
+    df = pd.read_csv(path, sep="\t", dtype=float)
     return df

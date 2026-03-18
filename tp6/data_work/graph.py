@@ -8,6 +8,7 @@ from data_work.reg_coef import r_coef
 from data_work.parsers import parse_name
 from data_work.parsers import parse_light_name
 from data_work.parsers import parse_data_file
+from data_work.parsers import parse_txt_file
 
 
 def temp_results():
@@ -42,6 +43,44 @@ def temp_data(path, action="get"):
 def regression(t, a, b, c):
     reg = a * np.exp(-1 * t / b) + c
     return reg
+
+
+def graph_exp(df):
+    X = df["Temp. RTD"]
+    K = df["Type K"]
+    J = df["Type J"]
+    E = df["Type E"]
+    fig, ax = plt.subplots()
+    ax.plot(X, K, label="type K", marker="o")
+    ax.plot(X, J, label="Type J", marker="x")
+    ax.plot(X, E, label="type E", marker="^")
+    ax.axhline(y=0, linestyle="--", linewidth=1, color="grey")
+    ax.set_xlabel("Température (°C)")
+    ax.set_ylabel("Tension (mV)")
+    ax.legend(loc="lower right")
+    fig.tight_layout()
+    return fig
+
+
+def make_graphs_tp7(path):
+    plt.rcParams.update(
+        {
+            "text.usetex": True,  # render text with LaTeX
+            "font.family": "serif",  # use serif font (Times)
+            "font.serif": ["Times"],  # specify Times explicitly
+            "font.size": 17,  # base font size for axes, labels, legends
+            "axes.titlesize": 19,  # title size
+            "axes.labelsize": 17,  # x/y labels
+            "xtick.labelsize": 15,  # tick labels
+            "ytick.labelsize": 15,
+        }
+    )
+    df = parse_txt_file(path)
+    exp = graph_exp(df)
+    parent_dir = os.path.abspath(os.path.join(os.path.dirname(path), ".."))
+    save_dir = os.path.join(parent_dir, "graphs")
+    exp.savefig(os.path.join(save_dir, "mesures.png"), dpi=300, bbox_inches="tight")
+    return None
 
 
 def make_graph(path):
