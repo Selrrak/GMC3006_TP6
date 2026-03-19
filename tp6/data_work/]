@@ -32,7 +32,5 @@ def lin_regression(X, Y):
     X = sm.add_constant(X)  # adds intercept term
     model = sm.OLS(Y, X).fit()
     params = model.params
-    b, a = params["const"], params["Temp. RTD"]
-    Y = a * X + b
-    Y = Y["Temp. RTD"]
-    return Y, (a, b)
+    print((params["const"], params["Temp. RTD"]))
+    return model

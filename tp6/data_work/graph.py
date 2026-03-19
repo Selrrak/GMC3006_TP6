@@ -4,6 +4,7 @@ import numpy as np
 import os
 import pandas as pd
 from data_work.actual_regression import do_regression
+from data_work.actual_regression import lin_regression
 from data_work.reg_coef import r_coef
 from data_work.parsers import parse_name
 from data_work.parsers import parse_light_name
@@ -51,14 +52,73 @@ def graph_exp(df):
     K = 1000 * df["Type K"]
     J = 1000 * df["Type J"]
     E = 1000 * df["Type E"]
-    fig, ax = plt.subplots()
-    ax.plot(X, K, label="type K", marker="o")
-    ax.plot(X, J, label="Type J", marker="x")
-    ax.plot(X, E, label="type E", marker="^")
+    K_reg = lin_regression(X, K)
+    regK = K_reg[0]
+    aK = round(K_reg[1][0], 3)
+    bK = round(K_reg[1][1], 3)
+    symbol = "-" if bK < 0 else "+"
+    bK = abs(bK)
+
+    J_reg = lin_regression(X, J)
+    regJ = J_reg[0]
+    aJ = round(J_reg[1][0], 3)
+    bJ = round(J_reg[1][1], 3)
+    symbol = "-" if bJ < 0 else "+"
+    bJ = abs(bJ)
+
+    E_reg = lin_regression(X, E)
+    regE = E_reg[0]
+    aE = round(E_reg[1][0], 3)
+    bE = round(E_reg[1][1], 3)
+    symbol = "-" if bE < 0 else "+"
+    bE = abs(bE)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    ax.scatter(X, K, label="type K", marker="o", color="orange")
+    ax.plot(X, regK, label="régression", color="orange", linestyle="--")
+    ax.text(
+        x=0.25,
+        y=0.95,  # coordinates in axes fraction
+        s=f"V = {aK} * T {symbol} {bK}",
+        transform=ax.transAxes,  # important: use axes coordinates
+        verticalalignment="top",
+        horizontalalignment="left",
+        fontsize=17,
+        color="orange",
+    )
+
+    ax.scatter(X, J, label="type J", marker="x", color="cyan")
+    ax.plot(X, regJ, label="régression", color="cyan", linestyle="--")
+    ax.text(
+        x=0.25,
+        y=0.80,  # coordinates in axes fraction
+        s=f"V = {aJ} * T {symbol} {bJ}",
+        transform=ax.transAxes,  # important: use axes coordinates
+        verticalalignment="top",
+        horizontalalignment="left",
+        fontsize=17,
+        color="cyan",
+    )
+
+    ax.scatter(X, E, label="type E", marker="^", color="green")
+    ax.plot(X, regE, label="régression", color="green", linestyle="--")
+    ax.text(
+        x=0.25,
+        y=0.65,  # coordinates in axes fraction
+        s=f"V = {aE} * T {symbol} {bE}",
+        transform=ax.transAxes,  # important: use axes coordinates
+        verticalalignment="top",
+        horizontalalignment="left",
+        fontsize=17,
+        color="green",
+    )
+
     ax.axhline(y=0, linestyle="--", linewidth=1, color="grey")
+
     ax.set_xlabel("Température (°C)")
     ax.set_ylabel("Tension (mV)")
-    ax.legend(loc="lower right")
+    ax.legend(loc="upper left")
     fig.tight_layout()
     return fig
 
@@ -67,7 +127,7 @@ def graph_NBS(nbs_df, mesure):
     TC_type = mesure.columns.tolist()[1]
     T_mes = mesure["Temp. RTD"]
     V_mes = 1000 * mesure[TC_type]
-    start = nbs_df.index[nbs_df["Temperature_C"] == -10][0]
+    start = nbs_df.index[nbs_df["Temperature_C"] == -10][1]
     end = nbs_df.index[nbs_df["Temperature_C"] == 80][0]
     subset = nbs_df.loc[start:end]
     subset.to_csv("data.csv", index=False)
@@ -80,7 +140,7 @@ def graph_NBS(nbs_df, mesure):
         V_ref_loc = nbs_df.index[nbs_df["Temperature_C"] == T_ref][0]
         V_ref = nbs_df["Voltage_mV"][V_ref_loc]
         ax.plot(T, V - V_ref, label="valeur NBS recalée", color="green")
-    ax.plot(T_mes, V_mes, label="mesure", marker="o", color="orange")
+    ax.scatter(T_mes, V_mes, label="mesure", marker="o", color="orange")
     ax.axhline(y=0, linestyle="--", linewidth=1, color="grey")
     ax.set_xlabel("Température (°C)")
     ax.set_ylabel("Tension (mV)")
@@ -93,7 +153,7 @@ def make_graphs_tp7(path):
     mesure = os.path.join(path, "data.txt")
     nbs_dir = os.path.join(path, "NBS_data")
     parent_dir = os.path.abspath(os.path.join(os.path.dirname(mesure), ".."))
-    save_dir = os.path.join(parent_dir, "graphs")
+    save_dir = os.path.join(parent_dir, "Rapport_TP6_7_GMC3006/graphs")
 
     plt.rcParams.update(
         {
@@ -290,3 +350,35 @@ def make_tables(rc_df, path):
 def get_NBS_table(path):
     df = nbs_table_parser(path)
     return df
+
+
+def tp7_table(path):
+    data = [
+        ["-", "microV/°C", '"'],
+        ["K", "40", "40"],
+        ["J", "51", "51"],
+        ["E", "62", "62"],
+    ]
+    colonnes = [
+        "Type de thermocouple",
+        "Coefficient d'effet seebeck de référence",
+        '" expérimental',
+    ]
+    df = pd.DataFrame(data, columns=colonnes)
+
+    fig, ax = plt.subplots()
+    ax.axis("off")
+
+    table = ax.table(
+        cellText=df.values,
+        colLabels=df.columns,
+        loc="center",
+    )
+
+    for cell in table.get_celld().values():
+        cell.set_text_props(ha="center", va="center")
+
+    save_path = os.path.join(path, "Seebeck.png")
+    fig.savefig(save_path, dpi=300, bbox_inches="tight")
+
+    return None

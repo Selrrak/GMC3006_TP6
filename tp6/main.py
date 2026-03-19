@@ -7,6 +7,7 @@ def main():
     cwd = os.getcwd()
     parent_dir = os.path.abspath(os.path.join(cwd, ".."))
     data_dir = os.path.join(parent_dir, "TP6_data")
+    fig_dir = os.path.join(parent_dir, "Rapport_TP6_7_GMC3006/graphs")
     rc.r_coef(cwd, action="gen")
     for filename in os.listdir(data_dir):
         if not filename.lower().endswith(".lvm"):
@@ -22,6 +23,7 @@ def main():
 
     data_tp7 = os.path.join(parent_dir, "TP7_data")
     graph.make_graphs_tp7(data_tp7)
+    graph.tp7_table(fig_dir)
 
 
 if __name__ == "__main__":
