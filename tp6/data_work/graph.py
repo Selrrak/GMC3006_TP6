@@ -9,6 +9,7 @@ from data_work.parsers import parse_name
 from data_work.parsers import parse_light_name
 from data_work.parsers import parse_data_file
 from data_work.parsers import parse_txt_file
+from data_work.parsers import nbs_table_parser
 
 
 def temp_results():
@@ -62,7 +63,38 @@ def graph_exp(df):
     return fig
 
 
+def graph_NBS(nbs_df, mesure):
+    TC_type = mesure.columns.tolist()[1]
+    T_mes = mesure["Temp. RTD"]
+    V_mes = 1000 * mesure[TC_type]
+    start = nbs_df.index[nbs_df["Temperature_C"] == -10][0]
+    end = nbs_df.index[nbs_df["Temperature_C"] == 80][0]
+    subset = nbs_df.loc[start:end]
+    subset.to_csv("data.csv", index=False)
+    T = subset["Temperature_C"]
+    V = subset["Voltage_mV"]
+    fig, ax = plt.subplots()
+    ax.plot(T, V, label="valeur NBS", color="blue")
+    if TC_type == "Type J":
+        T_ref = 23
+        V_ref_loc = nbs_df.index[nbs_df["Temperature_C"] == T_ref][0]
+        V_ref = nbs_df["Voltage_mV"][V_ref_loc]
+        ax.plot(T, V - V_ref, label="valeur NBS recalée", color="green")
+    ax.plot(T_mes, V_mes, label="mesure", marker="o", color="orange")
+    ax.axhline(y=0, linestyle="--", linewidth=1, color="grey")
+    ax.set_xlabel("Température (°C)")
+    ax.set_ylabel("Tension (mV)")
+    ax.legend(loc="lower right")
+    fig.tight_layout()
+    return fig
+
+
 def make_graphs_tp7(path):
+    mesure = os.path.join(path, "data.txt")
+    nbs_dir = os.path.join(path, "NBS_data")
+    parent_dir = os.path.abspath(os.path.join(os.path.dirname(mesure), ".."))
+    save_dir = os.path.join(parent_dir, "graphs")
+
     plt.rcParams.update(
         {
             "text.usetex": True,  # render text with LaTeX
@@ -75,10 +107,16 @@ def make_graphs_tp7(path):
             "ytick.labelsize": 15,
         }
     )
-    df = parse_txt_file(path)
+    df = parse_txt_file(mesure)
     exp = graph_exp(df)
-    parent_dir = os.path.abspath(os.path.join(os.path.dirname(path), ".."))
-    save_dir = os.path.join(parent_dir, "graphs")
+
+    for filename in os.listdir(nbs_dir):
+        name = filename[5]
+        nbs_df = get_NBS_table(os.path.join(nbs_dir, filename))
+        mesure = df[["Temp. RTD", f"Type {name}"]]
+        nbs = graph_NBS(nbs_df, mesure)
+        nbs.savefig(os.path.join(save_dir, f"{name}.png"), dpi=300, bbox_inches="tight")
+
     exp.savefig(os.path.join(save_dir, "mesures_TP7.png"), dpi=300, bbox_inches="tight")
     return None
 
@@ -247,3 +285,8 @@ def make_tables(rc_df, path):
 
         fig.savefig(save_path_temp, dpi=300, bbox_inches="tight")
     return None
+
+
+def get_NBS_table(path):
+    df = nbs_table_parser(path)
+    return df

@@ -20,7 +20,7 @@ def main():
     rc_df = rc.r_coef(cwd, action="get")
     graph.make_tables(rc_df, cwd)
 
-    data_tp7 = os.path.join(parent_dir, "TP7_data/data.txt")
+    data_tp7 = os.path.join(parent_dir, "TP7_data")
     graph.make_graphs_tp7(data_tp7)
 
 
