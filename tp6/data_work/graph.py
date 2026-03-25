@@ -144,7 +144,7 @@ def graph_NBS(nbs_df, mesure):
     ax.axhline(y=0, linestyle="--", linewidth=1, color="grey")
     ax.set_xlabel("Température (°C)")
     ax.set_ylabel("Tension (mV)")
-    ax.legend(loc="lower right")
+    ax.legend(loc="upper left")
     fig.tight_layout()
     return fig
 
@@ -160,11 +160,11 @@ def make_graphs_tp7(path):
             "text.usetex": True,  # render text with LaTeX
             "font.family": "serif",  # use serif font (Times)
             "font.serif": ["Times"],  # specify Times explicitly
-            "font.size": 17,  # base font size for axes, labels, legends
-            "axes.titlesize": 19,  # title size
-            "axes.labelsize": 17,  # x/y labels
-            "xtick.labelsize": 15,  # tick labels
-            "ytick.labelsize": 15,
+            "font.size": 15,  # base font size for axes, labels, legends
+            "axes.titlesize": 17,  # title size
+            "axes.labelsize": 15,  # x/y labels
+            "xtick.labelsize": 13,  # tick labels
+            "ytick.labelsize": 13,
         }
     )
     df = parse_txt_file(mesure)

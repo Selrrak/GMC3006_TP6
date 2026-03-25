@@ -1,17 +1,17 @@
 \babel@toc {french}{}\relax 
-\contentsline {section}{\numberline {1}Introduction}{3}{}%
-\contentsline {section}{\numberline {2}Étalonnage dynamique de thermocouples (TP 6)}{4}{}%
-\contentsline {subsection}{\numberline {2.1}But}{4}{}%
-\contentsline {subsection}{\numberline {2.2}Graphiques}{4}{}%
-\contentsline {subsection}{\numberline {2.3}Tableau}{7}{}%
-\contentsline {subsection}{\numberline {2.4}Discussion}{7}{}%
-\contentsline {section}{\numberline {3}Fabrication d’un thermocouple (TP 6)}{8}{}%
-\contentsline {subsection}{\numberline {3.1}But}{8}{}%
-\contentsline {subsection}{\numberline {3.2}Tableau}{8}{}%
-\contentsline {subsection}{\numberline {3.3}Discussion}{8}{}%
-\contentsline {section}{\numberline {4}Étalonnage statique de Thermocouples (TP 7)}{10}{}%
-\contentsline {subsection}{\numberline {4.1}But}{10}{}%
-\contentsline {subsection}{\numberline {4.2}Graphiques}{10}{}%
-\contentsline {subsection}{\numberline {4.3}Tableau}{10}{}%
-\contentsline {subsection}{\numberline {4.4}Discussion}{10}{}%
-\contentsline {section}{\numberline {5}Conclusion}{11}{}%
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Étalonnage dynamique de thermocouples (TP 6)}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}But}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Graphiques}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tableau}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Discussion}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Fabrication d’un thermocouple (TP 6)}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}But}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Tableau}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Discussion}{9}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Étalonnage statique de Thermocouples (TP 7)}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}But}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Graphiques}{11}{subsection.4.2}%
+\contentsline {subsection}{\numberline {2.3}Tableau}{14}{subsection.2.3}%
+\contentsline {subsection}{\numberline {4.4}Discussion}{14}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Conclusion}{16}{section.5}%
