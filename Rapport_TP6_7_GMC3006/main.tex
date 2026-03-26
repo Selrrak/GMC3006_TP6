@@ -37,6 +37,7 @@
 \begin{document}
 
 \begin{titlepage}
+\pagenumbering{roman}
 \centering
 
 \vspace*{1cm}
@@ -47,7 +48,7 @@
 
 \vfill
 
-Travail présenté à Mme Janika Bourgeois et M. André Chamberland \\ [0.25cm]
+Travail présenté à Mme Janika Bourgeois \\ [0.25cm]
 Rédigé par \textbf{Zied Gharbi (536961413)} et \textbf{Charles Bouthilier (536842818)}
 
 \vfill
@@ -68,22 +69,23 @@ Université Laval
 
 %Introduction
 \newpage
+\pagenumbering{arabic}
 \thispagestyle{empty}
 \section{Introduction}
-Les thermocouples sont des outils utilisés pour la prise de température en laboratoire. Contrairement au thermomètre, le thermocouple exploite l'effet Seebeck, soit la différence de tension générée par une différence de températures aux bornes de métaux distincts. Les thermocouples sont donc constitués de deux tiges de métaux différents,  soudées à une extrémité. Lorsque le joint soudé est chauffé, une tension se forme dans chacune des tiges, et la différence entre les deux peut être mesurée pour déduire la température au joint. La nature de la paire de métaux utilisée donne son type au thermocouple, associé à une lettre: J, K, T ou E.
+Les thermocouples sont des outils utilisés pour la prise de température en laboratoire. Contrairement à un thermomètre au mercure, un thermocouple exploite l'effet Seebeck, soit la différence de tension générée par une différence de températures aux bornes de métaux distincts. Les thermocouples sont donc constitués de deux tiges de métaux différents, soudées à une extrémité. Les extrémités libres sont maintenues à une même température et connectées à un instrument de mesure de la tension. Lorsque le joint soudé est chauffé, sans pour autant affecter la température aux extrémités libres, une tension pourra être lue à l'instrument, fonction de la température de la jonction soudée ainsi que de celle des jonctions avec l'instrument de mesure de la tension. La nature de la paire de métaux utilisée donne son type au thermocouple, associé à une lettre: J, K, T ou E. Afin de compenser l'effet de la température aux connexions avec le voltmètre, on peut créer une seconde jonction de même nature que celle chauffée à l'aide d'une troisième tige de métal. La température de cette nouvelle jonction sert maintenant de référence pour les mesures.\cite{Lemay2017}
 \\
 \\
-Afin d'être utilisé adéquatement, le thermocouple doit être étalonné dynamiquement et statiquement. Cela permet de déterminer le temps nécessaire pour que sa mesure reflète la température à mesurer, ainsi que la différence de tension attendue pour une température donnée.
+Cela dit, afin de pouvoir produire des mesures valides, le thermocouple doit aussi être étalonné dynamiquement et statiquement. Cela permet de déterminer le temps nécessaire pour que sa mesure atteigne le régime stationnaire, ainsi que la différence de tension attendue pour une température donnée.
 \\
 \\
-L'objectif du travail est de proceder aux deux types d'étalonnage pour des thermocouples variant en matériaux et en dimensions, ainsi que de comparer les performance d'un thermocouple à d'autres moyens de mesure de température. L'étalonnage dynamique est effectué en soumettant des thermocouples à un échelon connu de température et en observant le régime transitoire de la tension mesurée, alors que l'étalonnage statique est effectué en observant la relation entre température et tension en régime stationnaire.
+L'objectif du travail est de procéder aux deux types d'étalonnage pour des thermocouples variant en matériaux et en dimensions, ainsi que d'estimer les performances d'un tel thermomètre en prenant des mesures avec une jonction de référence froide et un module de compensation électronique, puis en comparant les résultats avec les mêmes mesures prisent avec un thermomètre au mercure et un thermomètre électronique. L'étalonnage dynamique est effectué en soumettant des thermocouples à un échelon connu de température et en observant le régime transitoire de la tension mesurée, alors que l'étalonnage statique est effectué en observant la relation entre température et tension en régime stationnaire.
 
 % Partie 1
 \newpage
 \section{Étalonnage dynamique de thermocouples (TP 6)}
 \thispagestyle{empty}
 \subsection{But}
-Cette première partie a comme objectif principal la recherche de la constante de temps de thermocouples de type K dont la jonction chaude varie en taille. L'objectif secondaire est d'apprécier l'effet d'une gamme de tension trop grande pour la prise de mesure a effectuer. Les résultats pour des thermoucouples dont le diamètre varie entre 0.005 po et 0.032 po sont présentés aux $\Cref{fig:TC_0005}$ à $\Cref{fig:TC_0032}$. La $\Cref{fig:TC_10V}$ présente l'effet d'une mauvaise calibration de la gamme de mesure. Les valeurs de constantes de temps sont repertoriées à la $\Cref{tab:Tau_tab}$. 
+Cette première partie a comme objectif principal la recherche de la constante de temps de thermocouples de type K dont la jonction chaude varie en taille. L'objectif secondaire est d'apprécier l'effet d'une gamme de tension trop grande pour la prise de mesure à effectuer. Les résultats pour des thermocouples dont le diamètre varie entre 0.005 po et 0.032 po sont présentés aux figures \ref{fig:TC_0005} à \ref{fig:TC_0032}. La figure \ref{fig:TC_10V} présente l'effet d'une mauvaise calibration de la gamme de mesure. Les valeurs de constantes de temps sont répertoriées au tableau \ref{tab:Tau_tab}. 
 \subsection{Graphiques}
 
 %Graph 1
@@ -91,7 +93,7 @@ Cette première partie a comme objectif principal la recherche de la constante d
 \begin{figure} [H]
     \centering
     \includegraphics[width=1\linewidth]{graphs/TC_0005_s_filtre_50mvno_title.png}
-    \caption{Tension mesurée au bornes d’un thermocouple de 0.005 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés. Les donnés ont été recadrées pour exclure le temps d'acquisition antérieur à la plongée afin d'ameliorer la qualité du modèle exponentiel. Les points ne sont pas liés entre eux pour apprécier l'effet de la fréquence et de la gamme d'acquisition sur la prise de mesures.}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.005 po de diamètre de jonction chaude lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, avec une jonction de référence dans un autre bain d'eau glacée, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés. Les donnés ont été recadrées pour exclure le temps d'acquisition antérieur à la plongée afin d'ameliorer la qualité du modèle exponentiel. Le terme au dénominateur de l éxposant est la constante de temps recherchée. On observe un régime stationnaire non nul, ce qui est causé par une différence température entre la référence et le bain dans lequel eest plongé la jonction chaude. Cela n'a pas d'effet sur le régime transitoire. Les points ne sont pas liés entre eux pour apprécier l'effet de la fréquence et de la gamme d'acquisition sur la prise de mesures.}
     \label{fig:TC_0005}
 \end{figure}
 
@@ -99,31 +101,32 @@ Cette première partie a comme objectif principal la recherche de la constante d
 \begin{figure} [H]
     \centering
     \includegraphics[width=1\linewidth]{graphs/TC_010_s_filtreno_title.png}
-    \caption{Tension mesurée au bornes d’un thermocouple de 0.010 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.010 po de diamètre de jonction chaude lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, avec une jonction de référence dans un autre bain d'eau glacée, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
     \label{fig:TC_0010}
 \end{figure}
 
 %Graph 3
-\begin{figure}
+\begin{figure} [H]
     \centering
     \includegraphics[width=1\linewidth]{graphs/TC_0020_s_filtreno_title.png}
-    \caption{Tension mesurée au bornes d’un thermocouple de 0.020 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.020 po de diamètre de jonction chaude lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, avec une jonction de référence dans un autre bain d'eau glacée, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
     \label{fig:TC_0020}
 \end{figure}
 
 %Graph 4
-\begin{figure}
+\begin{figure} [H]
     \centering
     \includegraphics[width=1\linewidth]{graphs/TC_0032_s_filtreno_title.png}
-    \caption{Tension mesurée au bornes d’un thermocouple de 0.032 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.032 po de diamètre de jonction chaude lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, avec une jonction de référence dans un autre bain d'eau glacée, acquise sur une gamme de -50 à 50 mV pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}    
     \label{fig:TC_0032}
 \end{figure}
 
 %Graph 5
-\begin{figure}
+\begin{figure} [H]
     \centering
     \includegraphics[width=1\linewidth]{graphs/TC_0005_s_filtre_10v_2no_title.png}
-    \caption{Tension mesurée au bornes d’un thermocouple de 0.005 po de diamètre lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, acquise sur une gamme de -10 à 10 V pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}    \label{fig:TC_10V}
+    \caption{Tension mesurée au bornes d’un thermocouple de 0.005 po de diamètre de jonction chaude lorsque plongé dans un bain d'eau glacée depuis une pièce à 23.9°C, avec une jonction de référence dans un autre bain d'eau glacée, acquise sur une gamme de -10 à 10 V pendant trois secondes à une fréquence de 10 kHz, ainsi que la courbe de tendance modèlisée à partir des donnés.}
+    \label{fig:TC_10V}
 \end{figure}
 \setcounter{section}{2}
 \subsection{Tableau}
@@ -136,42 +139,42 @@ Cette première partie a comme objectif principal la recherche de la constante d
         \hline
         Diamètre thermocouple [po] & Gamme de prise de mesure & Constante de temps [s] \\
         \hline
-        0.005 & [-10;10] V  & 1.005362 \\
+        0.005 & [-10;10] V  & 1.005 \\
         \hline
-        0.005  & [-50;50] mV & 0.027637 \\
+        0.005  & [-50;50] mV & 0.028 \\
         \hline
-        0.01  & [-50;50] mV & 0.083208 \\
+        0.01  & [-50;50] mV & 0.083 \\
         \hline
-        0.02  & [-50;50] mV & 0.024748 \\
+        0.02  & [-50;50] mV & 0.025 \\
         \hline
-        0.032 & [-50;50] mV & 0.063595 \\
+        0.032 & [-50;50] mV & 0.067 \\
         \hline
     \end{tabular}
 \end{table}
 
 \subsection{Discussion}
-Comme le montre la $\Cref{tab:Tau_tab}$, la constante de temps la plus faible observée est de 0.024748 s, associée au thermocouple dont la jonction chaude a un diamètre de 0.02 po. Ainsi, ce thermocouple est le plus réactif, c'est à dire qu'il répond le plus rapidement aux variations de température pour atteindre un état stationnaire.
+Comme le montre le tableau \ref{tab:Tau_tab}, la constante de temps la plus faible observée est de 0.025 s, associée au thermocouple dont la jonction chaude a un diamètre de 0.02 po. Ainsi, ce thermocouple est le plus réactif, c'est-à-dire qu'il répond le plus rapidement aux variations de température pour atteindre un état stationnaire.
 \\
-Cette observation constitue une contradiction au résultat attendu. En effet, le thermocouple ayant le plus petit diamètre de jonction chaude devrait posséder la constante de temps la plus faible. Cela s'explique par le fait que la constante de temps augmente avec l'inertie thermique, qui est elle même proportionelle à la masse d'un thermocouple. Par conséquent, un thermocouple dont la jonction chaude est de plus petit diamètre possède une masse plus faible, ce qui devrait se traduire par une constante de temps plus faible également.\cite{huang2024thermocouple} Or, les résultats observés indiquent que le plus petit thermocouple (0,005 po) possède une constante de temps de 0.027637 s, qui est supérieure à la constante de temps associée au thermocouple de 0.02 po. On note également que, encore selon la $\Cref{tab:Tau_tab}$, l'ordre croissant des diamètres de thermocouple n'est pas le même que celui des constantes de temps. On en conclu qu'un phénomène externe non controllé lors de l´expérimentation fausse les résultats. Ce phénomène est la convection...
+Cette observation constitue une contradiction au résultat attendu. En effet, le thermocouple ayant le plus petit diamètre de jonction chaude devrait posséder la constante de temps la plus faible. Cela s'explique par le fait que la constante de temps augmente avec l'inertie thermique, qui est elle-même proportionnelle à la masse d'un thermocouple. Par conséquent, un thermocouple dont la jonction chaude est de plus petit diamètre possède une masse plus faible, ce qui devrait se traduire par une constante de temps plus faible également. Or, les résultats observés indiquent que le plus petit thermocouple (0,005 po) possède une constante de temps de 0.028 s, qui est supérieure à la constante de temps associée au thermocouple de 0.020 po. On note également que, encore selon le tableau \ref{tab:Tau_tab}, l'ordre croissant des diamètres de thermocouple n'est pas le même que celui des constantes de temps. On en conclu qu'un phénomène externe non contrôlé lors de l'expérimentation fausse les résultats. Si l'inertie thermique est inhérente au thermocouple, son coefficient de transfert thermique dépend de la vitesse à lequel le thermocouple a été plongé. Idéalement, celle-ci est instantanée, cependant, comme l'expérimentation a été effectuée manuellement, la vitesse de plongée a varié d'un essai à un autre, expliquant ainsi la discordance entre la théorie et les mesures.\cite{huang2024thermocouple}
 \\
-La $\Cref{fig:TC_10V}$ présente l'essai effectué avec le thermocouple de 0.005 po de diamètre pour une gamme d'acquisition de -10 à 10 V. Plutôt que de suivre une tendance exponentielle décroissante comme c'est le cas dans les quatres figures précédentes, les donnés sont organisées en strates séparées de 0.3 mV environ. Bien qu'une régression est faite à partir de ces donnés, l'ordre de la constante de temps résultante par rapport à celui des autres pouvre l'inutilité de l'opération. La distribution des points dans la figure est causée par la résolution de mesure insuffisante par rapport à l'échelle du phènomène à observé. Celui-ci est de l'ordre de quelques dixièmes de mV, comme l'on peut l'observé dans la $\Cref{fig:TC_0005}$, qui présente des donnés du même thermocouple que la $\Cref{fig:TC_10V}$, mais avec une bien meilleur résolution.  En connaissant le nombre de bits M  du convertisseur utilisé pour la prise de mesures, ainsi que la taille de la gamme en Volts $E_{FSR}$, on peut calculer la résolution Q de la prise de mesure avec l'équation 1.1.
+La figure \ref{fig:TC_10V} présente l'essai effectué avec le thermocouple de 0.005 po de diamètre pour une gamme d'acquisition de -10 à 10 V. Plutôt que de suivre une tendance exponentielle décroissante comme c'est le cas dans les quatre figures précédentes, les donnés sont organisées en strates séparées de 0.3 mV environ. Bien qu'une régression est faite à partir de ces donnés, l'ordre de la constante de temps résultante par rapport à celui des autres prouve l'inutilité de l'opération. En effet, le tableau \ref{tab:Tau_tab} indique une constante de 1.005 s pour le thermocouple de 0.005 po de diamètre lorsque la gamme d'acquisition est de 20 V, ce qui est bien loin du 0.028 s mentionné précédemment. La distribution en strates des points dans la figure est causée par la résolution de mesure insuffisante par rapport à l'échelle du phénomène à observer. Celle-ci est de l'ordre de quelques dixièmes de mV, comme l'on peut l'observé dans la figure \ref{fig:TC_0005}, qui présente des donnés du même thermocouple que la \ref{fig:TC_10V}, mais avec une bien meilleure résolution.  En connaissant le nombre de bits M  du convertisseur utilisé pour la prise de mesures, ainsi que la taille de la gamme en Volts $E_{FSR}$, on peut calculer la résolution Q de la prise de mesure avec l'équation \ref{eq:quant}.
 \begin{equation}
-	Q = \frac{E_{FSR}}{2^{M}}
+	Q = \frac{E_{FSR}}{2^{M}} \label{eq:quant}
 \end{equation}
-Dans le cas de la prise de mesure de la figure 1.5, avec un convertisseur 16 bits, ainsi qu'une gamme de 20V, on obtient Q=0.305 mV, ce qui correspond à la distance entre les strates de la figure. Par comparaison, avec le même convertisseur, mais une gamme de 100 mV comme pour les figures 1.1 à 1.4, on obtient une résolution de 1.52 $\mu$mV, ce qui explique pourquoi la distance verticale minimale entre deux points de ces figure est si petite et permet l'établissement d'une regression exponentielle.
+Dans le cas de la prise de mesure de la figure \ref{fig:TC_10V}, avec un convertisseur 16 bits, ainsi qu'une gamme de 20 V, on obtient Q=0.305 mV, ce qui correspond à la distance entre les strates de la figure. Par comparaison, avec le même convertisseur, mais une gamme de 100 mV comme pour les figures \ref{fig:TC_0005} à \ref{fig:TC_0032}, on obtient une résolution de 1.52 $\mu$mV, ce qui explique pourquoi la distance verticale minimale entre deux points de ces figures est infime, bien que visible et permet l'établissement d'une régression exponentielle.
 %Partie 2
 \newpage{}
 \section{Fabrication d’un thermocouple (TP 6)}
 \thispagestyle{empty}
 
 \subsection{But}
-Cette deuxième partie a pour objectif la vérification des performances d'un thermocouple de type K construit artisanalement à l'atelier du département de génie mécanique en comparant la températures provenant des tables NBS correspondant à la différence de potentiel entre ses bornes, à des mesures prisent par un thermomètre à l'alcool et un thermomètre électronique. Le thermocouple est affublé d'abord d'une sonde plongée dans l'eau glacée, puis d'un module de compensation électronique avant de prendre les mesures, pour pouvoir utiliser les tables NBS. Les mesures sont prises à l'air ambient, ainsi que dans un contenant d'eau chaude.
+Cette deuxième partie a pour objectif la vérification des performances d'un thermocouple de type K construit artisanalement à l'atelier du département de génie mécanique en comparant la température provenant des tables NBS et correspondant à la différence de potentiel mesurée, à des mesures prisent par un thermomètre à l'alcool et un thermomètre électronique. Le thermocouple est affublé d'abord d'une sonde de référence plongée dans l'eau glacée, puis d'un module de compensation électronique avant de prendre les mesures, afin de pouvoir utiliser les tables NBS sans ajustement. Les mesures sont prises à l'air ambiant, ainsi que dans un contenant d'eau chaude. Le tableau \ref{tab:Perf_TC} répertorie les résultats.
 
 \subsection{Tableau}
 % Requires: \usepackage{multirow}
 \begin{table}[h]
     \centering
-    \caption{mesure de température avec différents instruments}
+    \caption{mesure de température avec différents instruments. Si les données pour les thermomètres électronique et au mercure sont des lectures directes sur les instruments, celles des thermocouples sont des moyennes arithmétiques de 30000 points échantillonés à 10kHz après atteinte du régime stationnaire.}
     \label{tab:Perf_TC}
     \begin{tabular}{|l|c|c|}
         \hline
@@ -180,52 +183,48 @@ Cette deuxième partie a pour objectif la vérification des performances d'un th
         Thermomètre électronique & 23.9 & 47.0 \\ \hline
         Thermocouple, sonde de référence dans l'eau glacée & 20.3 & 42.4 \\ \hline
         Thermocouple, module de compensation & 25.9 & 44.3 \\ \hline
-        Thermomètre à l'alcool & 23.5 & 48.0 \\ \hline
+        Thermomètre au mercure & 23.5 & 48.0 \\ \hline
     \end{tabular}
 \end{table}
 
 \subsection{Discussion}
-\textbf{Comparaison des résultats pour la température ambiante:} \\
-Tout d’abord, les résultats du thermomètre électrique et du thermomètre à alcool présentent des températures similaires pour l’air ambiant. Ces mesures suggèrent que la température ambiante réelle serait d’environ 24 °C. Le résultat obtenu par le thermocouple avec la sonde dans l’eau glacée est inférieur aux résultats obtenus avec les thermomètres. Alors que le résultat obtenu avec le thermocouple utilisant le module de compensation est supérieur aux résultats obtenus avec les thermomètres. Cependant, les résultats restent dans le même ordre de grandeur avec un écart de quelques degrés. \\
-Plusieurs sources d'erreurs peuvent expliquer la différence entre les résultats obtenus. Notamment, une mauvaise calibration du module de compensation pourrait être la cause de la température obtenue, qui est supérieure à celle attendue. La valeur de température inférieure obtenue par le thermocouple avec la sonde de référence dans l'eau glacée pourrait venir de l’aspect instable de la température de l'eau pour la sonde. De plus, une imperfection lors de la fabrication du thermocouple pourrait aussi expliquer les différents résultats obtenus pour la température. \\
-
-\textbf{Comparaison des résultats pour la température de l'eau chaude:} \\
-Tout d’abord, les résultats du thermomètre électrique et du thermomètre à alcool présentent des températures similaires pour l’eau chaude. Ces mesures suggèrent que la température de l’eau chaude serait située entre 47 °C et 48 °C. Les mesures avec les thermocouples sont plus basses que celles obtenues avec les thermomètres. Plus précisément, les résultats des thermocouples suggèrent une température de l’eau chaude autour de 43 °C, ce qui représente 4 à 5 °C de différence avec les mesures obtenues avec les thermomètres.\\ 
-Plusieurs sources d'erreurs peuvent expliquer la différence entre les résultats de température. Entre autres, l'instabilité de la température de l'eau chaude, qui diminuait avec le temps, pourrait expliquer une partie de cet écart. Ainsi, une imperfection au sein du thermocouple pourrait également expliquer les résultats de températures inférieures obtenus par le thermocouple.
+Tout d’abord, les résultats du thermomètre électronique et du thermomètre au mercure présentent des températures de 23.5 et 23.9\(^\circ\)C à l'air ambient, et 47.0\(^\circ\)C et 48.0\(^\circ\)C dans l'eau chaude. Les différences entre les mesures peuvent s'expliquer par la mauvaise utilisation du second thermomètre, que ce soit une erreur de lecture ou de manipulation.\\
+Quant aux mesures du thermocouple avec jonction froide dans l'eau glacée, elles sont de 20.39\(^\circ\)C à l'air ambiant et 42.4\(^\circ\)C dans l'eau chaude. Ces chiffres sont significativement sous les valeurs des thermomètres non-thermocouples, ce qui s'explique par la température trop élevée de la jonctino froide. En effet, comme les températures sont obtenus en convertissant une lecture de tension d'après une table NBS utilisant une référence à 0, \(^\circ\)C, si la référence est plus chaude, alors la tension est moins grande et la température de la jonction chaude est sous estimée. Cela explique pourquoi la différence est plus grande pour la mesure dans l'eau chaude. Comme celle-ci a été prise plus tard, la référence a eu le temps de réchauffer encore plus, réduisant d'avantage la tension.\\
+Pour les mesures du thermocouple avec le module de compensation électronique, à température pièce, elle est légèrement superieure aux valeurs attendues (25.9\(^\circ\)C) et inversement pour l'eau chaude (44.3\(^\circ\)C). Le module fonctionne en mesurant la température à l'endroit où il est en contact avec le thermocouple, ce qui lui permet de générer une tension supplémentaire pour simuler une jonction froide à 0\(^\circ\)C \cite{Atmaram2014CJC}. La compensation est donc trop grande pour l'air ambient, et trop faible pour l'eau chaude. Si cette hypothèse est valable pour l'air, pour l'autre situation, il est possible qu'une partie des données ayant servies à établir la tension moyenne soient antérieures à l'atteinte du régime stationnaire, donc plus petites qu'attendues. Une moyenne de tension plus petite mène à une lecture dans les tables NBS plus faible également, donc à une température de jonction chaude sous-estimée. 
 
 %Partie 3
 \newpage{}
 \section{Étalonnage statique de Thermocouples (TP 7)}
 \thispagestyle{empty}
 \subsection{But}
-L’objectif de la partie 3 est de caractériser la relation entre la température et la tension générée par des thermocouples de différents types, et ce, en régime stationnaire. En principe, cette relation est linéaire dans une certaine plage de mesure. Le coefficient de proportionalité entre les deux variables se nomme le coefficient d'effet Seebeck. Les valeurs déterminées expérimentalement sont comparées à celles de la litérature à titre de confirmation.  
+L’objectif principal de la partie 3 est de caractériser la relation entre la température et la tension générée par des thermocouples de différents types, et ce, en régime stationnaire. En principe, cette relation est linéaire dans une certaine plage de mesures. Le coefficient de proportionnalité entre les deux variables se nomme le coefficient d'effet Seebeck. Les valeurs déterminées expérimentalement sont comparées à celles de la littérature à titre de confirmation. L'objectif secondaire est d'observer les conséquences de l'absence de jonction froide sur la prise de mesure à l'aide d'un thermocouple en régime stationnaire. La figure \ref{fig:stat_all} superposent les mesures de tous les thermocouples avec leur régression linéaire, alors que les figures \ref{fig:stat_E} à \ref{fig:stat_J} compare les mesures aux données NBS. Finalement, le tableau \ref{tab:Seebeck} regroupe les valeurs de coefficients de Seebeck selon les tables NBS et selon les mesures.  
 \subsection{Graphiques}
 \setcounter{section}{2}
 \begin{figure} [H]
     \centering
     \includegraphics[width=0.85\linewidth]{graphs/mesures_TP7.png}
-    \caption{Mesures de tension (mV) en fonction de la température (°C) sur une plage de -10 à 80 °C, avec un incrément de 10 °C, pour différents types de thermocouple avec leurs courbes de régressions respectives. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. La ligne à 0 mV est identifiée pour souligner la température de référence des thermocouples. }
-    \label{fig:stat_tout_type}
+    \caption{Mesures de tension (mV) en fonction de la température (°C) sur une plage de -10 à 80 °C, avec un incrément de 10 °C, après atteinte du régime stationnaire, pour différents types de thermocouple avec leurs courbes de régressions respectives. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe, et celles de tensions sont en fait des moyennes arithmétiques de 100 points enregistrés à 50 Hz. La gamme d'acquisition est de -50 mV à 50 mV. La ligne à 0 mV est identifiée dans le graphique pour souligner la température de référence des thermocouples. }
+    \label{fig:stat_all}
 \end{figure}
 
 \begin{figure} [H]
     \centering 
     \includegraphics[width=0.85\linewidth]{graphs/E.png}
-    \caption{Mesures de tension (mV) en fonction de la température (°C) pour un thermocouple de type E, avec les valeurs NBS correspondante pour une plage de -10 à 80 °C. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. }
+    \caption{Mesures de tension (mV) en fonction de la température (°C) pour un thermocouple de type E, après atteinte du régime stationnaire, avec les valeurs NBS correspondante pour une plage de -10 à 80 °C. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. }
     \label{fig:stat_E}
 \end{figure}
 
 \begin{figure} [H]
     \centering
     \includegraphics[width=0.85\linewidth]{graphs/K.png}
-    \caption{Mesures de tension (mV) en fonction de la température (°C) pour un thermocouple de type K, avec les valeurs NBS correspondante pour une plage de -10 à 80 °C. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. }
+    \caption{Mesures de tension (mV) en fonction de la température (°C) pour un thermocouple de type K, après atteinte du régime stationnaire, avec les valeurs NBS correspondante pour une plage de -10 à 80 °C. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. }
     \label{fig:stat_K}
 \end{figure}
 
 \begin{figure} [H]
     \centering
     \includegraphics[width=0.85\linewidth]{graphs/J.png}
-    \caption{Mesures de tension (mV) en fonction de la température (°C) pour un thermocouple de type J, avec les valeurs NBS correspondante pour une plage de -10 à 80 °C. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. }
+    \caption{Mesures de tension (mV) en fonction de la température (°C) pour un thermocouple de type J, après atteinte du régime stationnaire, avec les valeurs NBS correspondante pour une plage de -10 à 80 °C. Les mesures ont été prises dans une unité d'étalonnage CL500 de la compagnie Omega. Celles de température ont été prises avec une sonde RTD externe. }
     \label{fig:stat_J}
 \end{figure}
 
@@ -246,32 +245,40 @@ L’objectif de la partie 3 est de caractériser la relation entre la températu
 \end{table}
 \setcounter{section}{4}
 \subsection{Discussion}
-Les résultats obtenus présentent une relation linéaire entre la tension mesurée et la température pour les trois types de thermocouples (E, J, K). Le thermocouple de type E présente la pente la plus élevée, avec un coefficient de Seebeck de 62 µV/°C, tandis que le thermocouple de type K présente la pente la plus faible, avec un coefficient de 40 µV/°C. Ainsi, le thermocouple de type E est le plus sensible aux variations de température, alors que le thermocouple de type K est le moins sensible.
+Les résultats obtenus présentent une relation linéaire entre la tension mesurée et la température pour les trois types de thermocouples (E, J, K), comme le montre la \ref{fig:stat_all}. Le thermocouple de type E présente la pente la plus élevée, avec un coefficient de Seebeck de 62 µV/°C, tandis que le thermocouple de type K présente la pente la plus faible, avec un coefficient de 40 µV/°C. Ainsi, le thermocouple de type E est le plus sensible aux variations de température, alors que le thermocouple de type K est le moins sensible.
 
-Les valeurs expérimentales du coefficient de Seebeck présentent une excellente concordance avec les valeurs attendues. En effet, les valeurs obtenues sont identiques aux valeurs de référence pour les trois thermocouples. Ces résultats confirment donc la relation linéaire attendue entre la tension d’un thermocouple et la température.
+Les valeurs expérimentales du coefficient de Seebeck présentent une excellente concordance avec les valeurs de références NBS, ce que l'on observe de la \ref{fig:stat_E} à la \ref{fig:stat_J}. Ces résultats témoignent de la validité des instruments de mesures choisis.
 
-Malgré l’obtention de résultats parfaits, certaines sources d’erreurs sont à considérer dans ce laboratoire, notamment l’incertitude des instruments de mesure ainsi que le bruit électrique dû au montage. Toutefois, ces erreurs sont suffisamment faibles pour ne pas affecter de façon significative les résultats.
+On remarque le décalage constant entre les mesures et les valeurs de références à la figure \ref{fig:stat_J}, causé par l'absence d'une jonction froide. Pour recaler les références, on se sert de l'ordonné à l'origine de la régression de l'étalonnage du thermocouple J, dont la valeur est -1.21 mV et que l'on retrouve à la figure \ref{fig:stat_all}. En sachant que la tension est théoriquement nulle lorsque la température est de 0\(^\circ\)C, l'ordonné à l'origine se trouve à être l'opposé de la tension qui serait mesurée si la jonction chaude du thermocouple serait à température ambiente, et la froide, à 0 \(^\circ\)C. La lecture dans la table NBS pour une tenion de 1.21 mV donne une température entre 23 et 24 \(^\circ\)C, ce qui correspond effectivement à la température ambiente, telle que consignée dans le tableau \ref{tab:Perf_TC}. En soustrayant manuellement aux donnés NBS 1.21 mV, on obtient une courbe sans décallage apparent aux mesures. Cette opération revient à faire manuellement ce que le module de compensation électronique fait pour les mesures concernées du tableau \ref{tab:Perf_TC}.   
+
 
 %Conclusion
 \newpage
 \thispagestyle{empty}
 \section{Conclusion}
-Les laboratoires 6 et 7 ont permis d’étudier l’étalonnage statique et dynamique des thermocouples, ainsi que de comprendre leur fabrication et leur fonctionnement.
-
-De façon plus précise, la partie 1 du rapport a permis de comprendre et de déterminer les constantes de temps des différents thermocouples. En effet, les données expérimentales ont montré que plus le diamètre d’un thermocouple diminue, plus sa constante de temps est faible. De plus, la gamme de prise de mesure est importante pour obtenir des données significatives.
-
-La partie 2 du rapport a permis de comprendre la fabrication des thermocouples et d’évaluer leur efficacité. Les températures expérimentales détectées par les thermocouples semblent moins précises que celles mesurées par les thermomètres. Les thermocouples ont enregistré des températures du même ordre que les thermomètres pour la température ambiante, avec une imprécision d’environ ± 3 °C. Cependant, pour l’eau chaude, les températures mesurées par les thermocouples sont inférieures à celles enregistrées par les thermomètres.
-
-La partie 3 du rapport porte sur l’identification des coefficients de l’effet Seebeck des différents types de thermocouples. Les données obtenues sont globalement en accord avec les valeurs théoriques. De plus, parmi les types de thermocouples étudiés, le thermocouple de type K présente le coefficient de Seebeck le plus faible, tandis que le thermocouple de type E présente le coefficient le plus élevé.
-
-Certaines différences peuvent s’expliquer par diverses sources d’erreurs expérimentales. Plus précisément, le bruit électrique de certains montages peut affecter les résultats obtenus. De plus, les instruments de mesure comportent des incertitudes. Enfin, la température peut varier au cours du temps, ce qui entraîne des écarts lors des comparaisons.
-
-Globalement, les résultats obtenus sont cohérents et confirment le bon fonctionnement des thermocouples comme capteurs de température. Ces travaux soulignent également les limites et le fonctionnement de ces capteurs. Dans une perspective future, il serait pertinent d’effectuer des tests à des températures plus élevées et dans des conditions contrôlées afin de caractériser les limites de performance des différents thermocouples.
-
+Les laboratoires 6 et 7 ont permis d’étudier l’étalonnage statique et dynamique des thermocouples, ainsi que de comprendre leur fabrication, leur fonctionnement et leurs performances face à d'autres moyens de mesure de température.
+\\
+\\
+De façon plus précise, la partie 1 du rapport a permis de comprendre et de déterminer les constantes de temps des différents thermocouples. Si la théorie tend à dire que, les données plus le diamètre d’un thermocouple diminue, plus sa constante de temps est faible, cette conclusion ne peut pas être faite avec les données expérimentales, à cause du coefficient de transfert thermique variable indépendamment de la taille du thermocouple. De plus, les mesures ont montré qu'il est judicieux de bien choisir la gamme d'acquisition pour avoir une résolution permettant d'identifier le phénomène à l'étude.
+\\
+\\
+La partie 2 du rapport a permis de comprendre la fabrication des thermocouples et d’évaluer leurs performances. Les températures expérimentales détectées par les thermocouples semblent moins précises que celles mesurées par les autres thermomètres. Les thermocouples ont enregistré des températures du même ordre que les autres thermomètres pour la température ambiante, avec une incertitude d’environ ± 3 °C qui s'explique par une erreur de calibration de la jonction froide. Cependant, pour l’eau chaude, c'est l'impact du régime transitoire qui a faussé les résultats.
+\\
+La partie 3 du rapport porte sur l’identification des coefficients d’effet Seebeck de thermocouples de types K,E et J. Les données obtenues sont globalement en accord avec les valeurs théoriques. De plus, parmi les types de thermocouples étudiés, le thermocouple de type K présente le coefficient de Seebeck le plus faible, tandis que le thermocouple de type E présente le coefficient le plus élevé. L'absence d'une jonction froide crée une erreur stationaire sur les mesures proportionnelle à la température ambiente, qu'il est possible de corriger manuellement, ou alors à l'aide d'un module à compensation électronique. 
+\\
+\\
+Globalement, les résultats obtenus sont cohérents et confirment le bon fonctionnement des thermocouples comme instrument de température. Ces travaux soulignent également les limites et le fonctionnement de ces capteurs.Dans une perspective future, afin d'améliorer les résultats de la partie un, il serait possible d'automatiser la plonge des thermocouple pour rendre constant le coefficient de transfert thermique. Quant à la partie deux, au-delà de garder la jonction froide à la bonne température plutôt que de la laisser se réchauffer, il faudrait tester plusieurs module de compensation pour identifier leur incertitude inhérente, ainsi que de s'assurer de l'atteinte du régime permanent avant de procéder à l'acquisition de données. Finalement, pour la partie trois, une suite intéressante à l'expérimentation serait de tester les limites de la linéarité de la relation température tension en aggrandissant la gamme de température.
 %Bibliographie
 \newpage
 \thispagestyle{empty}
 \begin{thebibliography}{9}
+
+\bibitem{Lemay2017}
+Lemay, Jean.
+(2017).
+\textit{Mesure, mécatronique et traitements de données}.
+Éditions JFD inc.
+
 
 \bibitem{huang2024thermocouple}
 Huang, Qinghuang; Yue, Lingling; Li, Xingyou; Wang, Peiyong, 
@@ -280,9 +287,12 @@ Huang, Qinghuang; Yue, Lingling; Li, Xingyou; Wang, Peiyong,
 
 \bibitem{electronicdesign}
 “Key DAQ Specifications,” Electronic Design, 
-\texttt{https://www.electronicdesign.com/home/
+\textit{https://www.electronicdesign.com/home/
 article/21201396/key-daq-specifications}
 
+\bibitem{Atmaram2014CJC}
+More, S. A. (2014). 
+\textit{Thermocouple, cold-junction compensation—analog approach} (Application Report SLOA204). Texas Instruments. https://www.ti.com/lit/an/sloa204/sloa204.pdf
 
 \end{thebibliography}
 

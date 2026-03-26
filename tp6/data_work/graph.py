@@ -133,7 +133,7 @@ def graph_NBS(nbs_df, mesure):
     subset.to_csv("data.csv", index=False)
     T = subset["Temperature_C"]
     V = subset["Voltage_mV"]
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(T, V, label="valeur NBS", color="blue")
     if TC_type == "Type J":
         T_ref = 23
@@ -219,14 +219,14 @@ def make_graph(path):
     reg = regression(time_series, a, b, c)
     ax.scatter(time_series, voltage, label="mesurée", s=2)
     ax.grid(True)
-    ax.plot(time_series, reg * 1000, label="modèle", color="orange")
+    ax.plot(time_series, reg * 1000, label="modèle", linewidth=2, color="orange")
     ax.set_xlabel("Temps (s)")
     ax.set_ylabel("Tension (mV)")
     ax.legend(loc="center right")
     c_symbol = "+"
     if c < 0:
         c_symbol = "-"
-    a, b, c = round(1000 * a, 6), round(b, 6), round(abs(1000 * c), 6)
+    a, b, c = round(1000 * a, 3), round(b, 3), round(abs(1000 * c), 3)
 
     parent_dir = os.path.abspath(os.path.join(path, "..", ".."))
     main_dir = os.path.join(parent_dir, "tp6")
